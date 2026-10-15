@@ -16,10 +16,14 @@
 
 // System includes
 #include <QObject>
+#include <atomic>
+#include <sys/mman.h>
+#include <cstring>
 
 // Libraries includes
 #include <openssl/evp.h>
 #include <openssl/rand.h>
+#include <openssl/crypto.h>
 
 // Application includes
 
