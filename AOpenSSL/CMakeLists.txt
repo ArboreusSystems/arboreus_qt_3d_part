@@ -110,15 +110,7 @@ endif()
 
 if(ANDROID)
 
-	set(${A_PREFIX}_ANDROID_ARCH)
-	if(${ANDROID_ABI} STREQUAL "armeabi-v7a")
-		set(${A_PREFIX}_ANDROID_ARCH armeabi_v7a)
-	elseif(${ANDROID_ABI} STREQUAL "arm64-v8a")
-		set(${A_PREFIX}_ANDROID_ARCH arm64_v8a)
-	else()
-		message(FATAL_ERROR "Android undefined build")
-	endif()
-
+	set(${A_PREFIX}_ANDROID_ARCH ${ANDROID_ABI})
 	set(${A_PREFIX}_LIB_OPENSSL_INCLUDE ${A_GLOBAL_DIR_LIB_OPENSSL}/android/${${A_PREFIX}_ANDROID_ARCH}/include)
 	set(${A_PREFIX}_LIB_OPENSSL_LIBCRYPTO ${A_GLOBAL_DIR_LIB_OPENSSL}/android/${${A_PREFIX}_ANDROID_ARCH}/lib/libcrypto.a)
 	set(${A_PREFIX}_LIB_OPENSSL_LIBSSL ${A_GLOBAL_DIR_LIB_OPENSSL}/android/${${A_PREFIX}_ANDROID_ARCH}/lib/libssl.a)
