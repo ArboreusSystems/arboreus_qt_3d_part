@@ -42,6 +42,7 @@ class AOpenSSL : public QObject {
 
 		void mInit(void);
 
+		static QString mVersion(void);
 		AOutputQByteArray mEncodeAES256CBC(
 			const QByteArray& inBytes, const QByteArray& inKey, const QByteArray& inVector
 		);

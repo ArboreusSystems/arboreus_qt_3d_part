@@ -89,21 +89,17 @@ set(${A_PREFIX}_INCLUDE_DIR_PUBLIC
 
 if(APPLE)
 
-	set(${A_PREFIX}_LIB_OPENSSL_INCLUDE ${A_GLOBAL_DIR_LIB_OPENSSL}/MacOS/include)
-	set(${A_PREFIX}_LIB_OPENSSL_LIBCRYPTO ${A_GLOBAL_DIR_LIB_OPENSSL}/MacOS/lib/libcrypto.a)
-	set(${A_PREFIX}_LIB_OPENSSL_LIBSSL ${A_GLOBAL_DIR_LIB_OPENSSL}/MacOS/lib/libssl.a)
+	set(${A_PREFIX}_LIB_OPENSSL_INCLUDE ${A_GLOBAL_DIR_LIB_OPENSSL}/macos/include)
+	set(${A_PREFIX}_LIB_OPENSSL_LIBCRYPTO ${A_GLOBAL_DIR_LIB_OPENSSL}/macos/lib/libcrypto.a)
+	set(${A_PREFIX}_LIB_OPENSSL_LIBSSL ${A_GLOBAL_DIR_LIB_OPENSSL}/macos/lib/libssl.a)
 
 endif()
 
 if(IOS)
 
-	set(${A_PREFIX}_IOS_TYPE)
+	set(${A_PREFIX}_IOS_TYPE "ios")
 	if(${CMAKE_OSX_SYSROOT} MATCHES "iphonesimulator")
-		set(${A_PREFIX}_IOS_TYPE IOSSimulator)
-	elseif(${CMAKE_OSX_SYSROOT} MATCHES "iphoneos")
-		set(${A_PREFIX}_IOS_TYPE IOS)
-	else()
-		message(FATAL_ERROR "iOS undefined build")
+		set(${A_PREFIX}_IOS_TYPE "ios-simulator")
 	endif()
 
 	set(${A_PREFIX}_LIB_OPENSSL_INCLUDE ${A_GLOBAL_DIR_LIB_OPENSSL}/${${A_PREFIX}_IOS_TYPE}/include)
@@ -115,11 +111,7 @@ endif()
 if(ANDROID)
 
 	set(${A_PREFIX}_ANDROID_ARCH)
-	if(${ANDROID_ABI} STREQUAL "x86_64")
-		set(${A_PREFIX}_ANDROID_ARCH x86_64)
-	elseif(${ANDROID_ABI} STREQUAL "x86")
-		set(${A_PREFIX}_ANDROID_ARCH x86)
-	elseif(${ANDROID_ABI} STREQUAL "armeabi-v7a")
+	if(${ANDROID_ABI} STREQUAL "armeabi-v7a")
 		set(${A_PREFIX}_ANDROID_ARCH armeabi_v7a)
 	elseif(${ANDROID_ABI} STREQUAL "arm64-v8a")
 		set(${A_PREFIX}_ANDROID_ARCH arm64_v8a)
@@ -127,9 +119,9 @@ if(ANDROID)
 		message(FATAL_ERROR "Android undefined build")
 	endif()
 
-	set(${A_PREFIX}_LIB_OPENSSL_INCLUDE ${A_GLOBAL_DIR_LIB_OPENSSL}/Android/${${A_PREFIX}_ANDROID_ARCH}/include)
-	set(${A_PREFIX}_LIB_OPENSSL_LIBCRYPTO ${A_GLOBAL_DIR_LIB_OPENSSL}/Android/${${A_PREFIX}_ANDROID_ARCH}/lib/libcrypto.a)
-	set(${A_PREFIX}_LIB_OPENSSL_LIBSSL ${A_GLOBAL_DIR_LIB_OPENSSL}/Android/${${A_PREFIX}_ANDROID_ARCH}/lib/libssl.a)
+	set(${A_PREFIX}_LIB_OPENSSL_INCLUDE ${A_GLOBAL_DIR_LIB_OPENSSL}/android/${${A_PREFIX}_ANDROID_ARCH}/include)
+	set(${A_PREFIX}_LIB_OPENSSL_LIBCRYPTO ${A_GLOBAL_DIR_LIB_OPENSSL}/android/${${A_PREFIX}_ANDROID_ARCH}/lib/libcrypto.a)
+	set(${A_PREFIX}_LIB_OPENSSL_LIBSSL ${A_GLOBAL_DIR_LIB_OPENSSL}/android/${${A_PREFIX}_ANDROID_ARCH}/lib/libssl.a)
 
 endif()
 
@@ -162,7 +154,7 @@ qt_add_library(${A_NAME_TARGET} STATIC ${${A_PREFIX}_SOURCES})
 
 target_link_libraries(${A_NAME_TARGET}
 	PRIVATE
-	        Qt6::Core
+		Qt6::Core
 		ALogger
 		ATemplates
 		${${A_PREFIX}_LIB_OPENSSL_LIBSSL}

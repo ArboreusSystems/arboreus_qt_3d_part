@@ -24,6 +24,7 @@
 #include <openssl/evp.h>
 #include <openssl/rand.h>
 #include <openssl/crypto.h>
+#include <openssl/opensslv.h>
 
 // Application includes
 

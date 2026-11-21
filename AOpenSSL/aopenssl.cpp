@@ -47,6 +47,20 @@ AOpenSSL::~AOpenSSL(void) {
 	Doc.
 */
 
+QString AOpenSSL::mVersion(void) {
+
+	QString oOutput = OPENSSL_VERSION_STR;
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 AOutputQByteArray AOpenSSL::mEncodeAES256CBC(
 	const QByteArray& inBytes, const QByteArray& inKey, const QByteArray& inVector
 ) {
@@ -168,7 +182,7 @@ AOutputQByteArray AOpenSSL::mDecodeAES256CBC(
 	int oLength = 0;
 	int oLengthTotal = 0;
 
-	const int oMaxDecodedLength = inBytes.size() + EVP_MAX_BLOCK_LENGTH;
+	const int oMaxDecodedLength = static_cast<const int>(inBytes.size() + EVP_MAX_BLOCK_LENGTH);
 	QByteArray oDecodedBytes;
 	oDecodedBytes.resize(oMaxDecodedLength);
 	mlock(oDecodedBytes.data(),oDecodedBytes.size());
