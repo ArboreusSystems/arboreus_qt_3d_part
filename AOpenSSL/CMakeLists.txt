@@ -38,8 +38,6 @@ option(A_OPTION_USING_PCH "${A_NAME_TARGET} using PCH support" ON)
 ## ----------------------------------------
 ## Library variables
 
-set(${A_PREFIX}_DIR_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
-
 set(${A_PREFIX}_SOURCES)
 set(${A_PREFIX}_SOURCES_PRECOMPILED_HEADERS_PUBLIC)
 set(${A_PREFIX}_SOURCES_PRECOMPILED_HEADERS_PRIVATE)
