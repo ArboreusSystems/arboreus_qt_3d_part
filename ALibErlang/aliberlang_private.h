@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\headerfile ALibErlang
+	\headerfile ALibErlang private
 	\title
 	\brief Template file wizard/classes/cpp/file.h
 
@@ -13,8 +13,8 @@
 */
 // ----------------------------------------------------------
 
-#ifndef ALIBERLANG_H
-#define ALIBERLANG_H
+#ifndef ALIBERLANG_PRIVATE_H
+#define ALIBERLANG_PRIVATE_H
 
 // Precompiled includes
 
@@ -23,4 +23,4 @@
 // Application includes
 
 
-#endif // ALIBERLANG_H
+#endif // ALIBERLANG_PRIVATE_H
