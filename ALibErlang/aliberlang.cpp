@@ -24,7 +24,7 @@ using namespace ARB;
 	Doc.
 */
 
-ALibErlang::ALibErlang(QObject* parent) {
+ALibErlang::ALibErlang(QObject* parent) : QObject(parent) {
 
 	_A_DEBUG << "ALibErlang created";
 }

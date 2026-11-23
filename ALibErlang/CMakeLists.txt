@@ -142,8 +142,10 @@ qt_add_library(${A_NAME_TARGET} STATIC ${${A_PREFIX}_SOURCES})
 target_link_libraries(${A_NAME_TARGET}
 	PRIVATE
 		Qt6::Core
+		${${A_PREFIX}_LIB_ERLANG}
 		ALogger
 		AOpenSSL
+		ATemplates
 )
 
 target_compile_definitions(${A_NAME_TARGET}
