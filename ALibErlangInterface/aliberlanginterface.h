@@ -45,13 +45,13 @@ class ALibErlangInterface : public AThreadTemplate<ALibErlangInterfaceService>  
 
 		void mInit(void);
 
-		void mNodePingHandler(const char* inNodeName,const char* inCookie,AOutputQVariant* inOutput);
+		void mNodePingHandler(const QString& inNodeFullName,const QString& inCookie,AOutputQVariant* inOutput);
 
 	public slots:
 
 		void slInitiated(void);
 
-		QVariantMap mNodePing(QString inNodeFullName,QString inCookie);
+		bool mNodePing(const QString& inNodeFullName,const QString& inCookie);
 
 	signals:
 

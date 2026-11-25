@@ -72,7 +72,7 @@ void ALibErlangInterface::mInit(void) {
 	Doc.
 */
 
-void ALibErlangInterface::mNodePingHandler(const char* inNodeName, const char* inCookie,AOutputQVariant* inOutput) {
+void ALibErlangInterface::mNodePingHandler(const QString& inNodeFullName,const QString& inCookie,AOutputQVariant* inOutput) {
 
 	AThreadObjectControllerTemplate oController;
 	QEventLoop oEventLoop;
@@ -80,7 +80,8 @@ void ALibErlangInterface::mNodePingHandler(const char* inNodeName, const char* i
 	AEIAgentPing oAgent;
 	oAgent.pService = this->mService();
 	oAgent.pCookie = inCookie;
-	oAgent.pNodeFullName = inNodeName;
+	oAgent.pNodeFullName = inNodeFullName;
+	oAgent.pOutput = inOutput;
 	QObject::connect(
 		&oAgent,&AEIAgentPing::sgFinished,
 		&oEventLoop,&QEventLoop::quit
@@ -118,16 +119,16 @@ void ALibErlangInterface::slInitiated(void) {
 	Doc.
 */
 
-QVariantMap ALibErlangInterface::mNodePing(QString inNodeFullName, QString inCookie) {
+bool ALibErlangInterface::mNodePing(const QString& inNodeFullName,const QString& inCookie) {
 
 	AOutputQVariant oOutput;
+	mNodePingHandler(inNodeFullName,inCookie,&oOutput);
+	if (oOutput.pStatus == _A_ENUM_STATUS::Ok) {
+		return true;
+	}
 
-	mNodePingHandler(
-		inNodeFullName.toUtf8().constData(),
-		inCookie.toUtf8().constData(),
-		&oOutput
-	);
+	_A_DEBUG << "Error when trying to ping:" << oOutput.pValue;
 
-	return oOutput.mToVariantMap();
+	return false;
 }
 
